@@ -10,7 +10,8 @@
     return BASE_PATH;
  }
 
- function view($path) {
-  $fullPath = get_base_path().'views/'.$path.'.view.php';
+ function view($path, $args = []) {
+   $fullPath = get_base_path().'views/'.$path.'.view.php';
+   extract($args);
   require($fullPath);
  }
