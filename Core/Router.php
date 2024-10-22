@@ -10,27 +10,25 @@ class Router {
 
   public static function get($endpoint, $controller, $action)
   {
-    static::$routes[] = [
-      'GET' =>  [$endpoint => $endpoint, 'controller' => $controller, 'action' => $action]
-    ];
+    static::$routes['GET'][$endpoint] =  ['controller' => $controller, 'action' => $action];
+    return new static;
   }
 
   public static function navigate() {
     $httpMethod = $_SERVER['REQUEST_METHOD'];
     $requestUri = $_SERVER['REQUEST_URI'];
-    foreach(static::$routes as $route) {
-      $isRouteDefined = !is_null($route[$httpMethod][$requestUri]);
-      if (!$isRouteDefined) {
-        view('404');
-      }
-      $controller = $route[$httpMethod]['controller'];
-      $action = $route[$httpMethod]['action'];
-      require_once BASE_PATH.str_replace('\\', '/', $controller).'.php';
-      $reflection = new ReflectionClass($controller);
-      $instance = $reflection->newInstance();
-      $method = $reflection->getMethod($action);
-      $method->invoke($instance);
+    $route = static::$routes[$httpMethod][$requestUri];
+    $isRouteDefined = !is_null($route);
+    if (!$isRouteDefined) {
+      return view('404');
     }
+    $controller = $route['controller'];
+    $action = $route['action'];
+    require_once BASE_PATH.str_replace('\\', '/', $controller).'.php';
+    $reflection = new ReflectionClass($controller);
+    $instance = $reflection->newInstance();
+    $method = $reflection->getMethod($action);
+    return $method->invoke($instance);
   }
 
 }
