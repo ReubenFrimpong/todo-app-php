@@ -1,6 +1,8 @@
 <?php
 
 namespace Core\Http\Controllers;
+require BASE_PATH.'Core/Database.php';
+
 class HomeController {
   
   public function index() {
@@ -8,6 +10,6 @@ class HomeController {
   }
 
   public function about() {
-    return view('about', ['title' => 'Home Page']);
+    return view('about', ['title' => 'About Page']);
   }
 }
