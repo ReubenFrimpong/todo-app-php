@@ -1,0 +1,2 @@
+# Start Server
+`php -S locahost:8080 -t public`
