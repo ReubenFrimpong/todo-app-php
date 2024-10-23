@@ -14,6 +14,12 @@ class Router {
     return new static;
   }
 
+  public static function post($endpoint, $controller, $action)
+  {
+    static::$routes['POST'][$endpoint] =  ['controller' => $controller, 'action' => $action];
+    return new static;
+  }
+
   public static function navigate() {
     $httpMethod = $_SERVER['REQUEST_METHOD'];
     $requestUri = $_SERVER['REQUEST_URI'];

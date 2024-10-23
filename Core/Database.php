@@ -12,7 +12,7 @@ class Database {
   {
     $config = require BASE_PATH.'/config.php';
     $dsn = 'mysql:'.http_build_query($config['db'], '', ';');
-    $this->connection = new PDO($dsn, $username, $password, [
+    $this->connection = $this->connection ?? new PDO($dsn, $username, $password, [
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
   }
