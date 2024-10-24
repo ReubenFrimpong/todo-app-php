@@ -22,3 +22,13 @@
     header("location: {$location}");
     exit();
  }
+
+ function previousUrl(){
+    return str_replace($_SERVER['HTTP_ORIGIN'], '', $_SERVER['HTTP_REFERER']);
+ }
+
+ function back()
+ {
+    redirect(previousUrl());
+ }
+

@@ -34,7 +34,8 @@ class Router {
     $reflection = new ReflectionClass($controller);
     $instance = $reflection->newInstance();
     $method = $reflection->getMethod($action);
-    return $method->invoke($instance);
+    $method->invoke($instance);
+    Session::flush('errors');
   }
 
 }

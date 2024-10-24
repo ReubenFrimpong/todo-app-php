@@ -28,4 +28,9 @@ class FormRequest {
   {
     return $this->validated;
   }
+
+  public function errors()
+  {
+    return $this->errors;
+  }
 }
