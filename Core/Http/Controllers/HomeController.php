@@ -1,7 +1,6 @@
 <?php
 
 namespace Core\Http\Controllers;
-require BASE_PATH.'Core/Database.php';
 
 class HomeController {
   

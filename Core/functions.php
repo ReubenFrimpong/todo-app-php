@@ -10,8 +10,15 @@
     return BASE_PATH.$path.'.php';
  }
 
- function view($path, $args = []) {
+ function view($path, $args = [])
+ {
    $fullPath = get_base_path('views/'.$path.'.view');
    extract($args);
   require($fullPath);
+ }
+
+ function redirect($location)
+ {
+    header("location: {$location}");
+    exit();
  }
